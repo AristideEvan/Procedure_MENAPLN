@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSpecialitesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('specialites', function (Blueprint $table) {
+            $table->id();
+            $table->string('libelleSpecialite')->nullable(false);
+            $table->string('slug')->nullable(false);//sans les accents
+            $table->string('abreviation')->nullable(true);
+            $table->text('description')->nullable(true);
+            $table->integer('deleted_by')->nullable()->references('id')->on('users');
+            $table->integer('filiere_id')->references('id')->on('filieres');
+            $table->integer('user_id')->references('id')->on('users');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('specialites');
+    }
+}

@@ -1,0 +1,27 @@
+/* Ajoutez du style pour la timeline */
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.step {
+    width: 30px;
+    height: 30px;
+    background-color: #fcfcfc;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.menu-sidebar2__content {
+    height: -webkit-calc(100vh - 75px);
+    height: -moz-calc(100vh - 75px);
+    height: calc(100vh - 75px);
+    border-right: 1px solid #e5e5e5;
+    position: relative;
+}
+
+
+

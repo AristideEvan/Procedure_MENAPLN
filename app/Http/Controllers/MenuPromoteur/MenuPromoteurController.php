@@ -16,45 +16,133 @@ use Illuminate\Support\Facades\DB;
 class MenuPromoteurController extends Controller
 {
     public function makeRequest(){
-
-
-        /* $typePromoteur = Typepromoteur::where('id', Auth::user()->promoteur->typePromoteur_id)->get();
-
-        $pieceJointes = DB::table('documents')
-            ->join('typedocuments', 'documents.typedocument_id', '=', 'typedocuments.id')
-            ->join('documenttypepromoteurs', 'documents.id', '=', 'documenttypepromoteurs.document_id')
-            ->join('typepromoteurs', 'documenttypepromoteurs.typepromoteur_id', '=', 'typepromoteurs.id')
-            ->where('typepromoteurs.id', '=', Auth::user()->promoteur->typePromoteur_id)
-            ->select('documents.id as docs_id','documents.libelleDocument',
-                    'documents.typedocument_id','typedocuments.id as typeDocs_id',
-                    'typedocuments.libelle')
-            ->get();
-           // dd($pieceJointes);
-            $nbr_ele = intdiv(count($pieceJointes),2) + 1;
-            $typesAndDocuments = [];
-            foreach ($pieceJointes as $pieceJointe) {
-                $typeDocumentId = $pieceJointe->typeDocs_id;
-                // Vérifiez si le type de document existe dans le tableau
-                if (!array_key_exists($typeDocumentId, $typesAndDocuments)) {
-                    $typesAndDocuments[$typeDocumentId]['typeDocument'] = [
-                        'typeDocs_id' => $pieceJointe->typeDocs_id,
-                        'libelle' => $pieceJointe->libelle,
-                ];
-                $typesAndDocuments[$typeDocumentId]['documents'] = [];
+            $user = Auth::user();
+            if($user->niveauAction == null){ 
+              //  dd($user->id);
+                $demandes = DB::table('demandes as dem')
+                ->select('dem.*',
+                        'village.id as village_id',
+                        'village.slug as nom_village',
+                        'commune.id as commune_id',
+                        'commune.slug as nom_commune',
+                        'province.id as province_id',
+                        'province.slug as nom_province',
+                        'region.id as region_id',
+                        'region.slug as nom_region',
+                        'typeEn.id as typeEns_id',
+                        'typeEn.libelle')
+                ->join('typeenseignements as typeEn', 'typeEn.id', '=', 'dem.typeenseignement_id')
+                ->join('localites as village', 'village.id', '=', 'dem.localite_id')
+                ->leftJoin('localites as commune', 'commune.id', '=', 'village.parent_id')
+                ->leftJoin('localites as province', 'province.id', '=', 'commune.parent_id')
+                ->leftJoin('localites as region', 'region.id', '=', 'province.parent_id')
+                ->where('dem.user_id', '=', $user->id)
+                ->get();
+            }else{
+                //Niveau DEP
+                if($user->niveauAction == 1){
+                    $stat = "DEP";
+                    $demandes = DB::table('demandes as dem')
+                    ->select('dem.*',
+                            'village.id as village_id',
+                            'village.slug as nom_village',
+                            'commune.id as commune_id',
+                            'commune.slug as nom_commune',
+                            'province.id as province_id',
+                            'province.slug as nom_province',
+                            'region.id as region_id',
+                            'region.slug as nom_region',
+                            'typeEn.id as typeEns_id',
+                            'typeEn.libelle')
+                    ->join('typeenseignements as typeEn', 'typeEn.id', '=', 'dem.typeenseignement_id')
+                    ->join('localites as village', 'village.id', '=', 'dem.localite_id')
+                    ->leftJoin('localites as commune', 'commune.id', '=', 'village.parent_id')
+                    ->leftJoin('localites as province', 'province.id', '=', 'commune.parent_id')
+                    ->leftJoin('localites as region', 'region.id', '=', 'province.parent_id')
+                    ->where('dem.statut', '=', $stat)
+                    ->orWhere('dem.statut', '=', 'Signé')
+                    ->get();
+        }
+                //Niveau Region
+                else if($user->niveauAction == 2){
+                    $stat = "Region";
+                    $demandes = DB::table('demandes as dem')
+                            ->select('dem.*',
+                                    'village.id as village_id',
+                                    'village.slug as nom_village',
+                                    'commune.id as commune_id',
+                                    'commune.slug as nom_commune',
+                                    'province.id as province_id',
+                                    'province.slug as nom_province',
+                                    'region.id as region_id',
+                                    'region.slug as nom_region',
+                                    'typeEn.id as typeEns_id',
+                                    'typeEn.libelle')
+                            ->join('typeenseignements as typeEn', 'typeEn.id', '=', 'dem.typeenseignement_id')
+                            ->join('localites as village', 'village.id', '=', 'dem.localite_id')
+                            ->leftJoin('localites as commune', 'commune.id', '=', 'village.parent_id')
+                            ->leftJoin('localites as province', 'province.id', '=', 'commune.parent_id')
+                            ->leftJoin('localites as region', 'region.id', '=', 'province.parent_id')
+                            ->where('region.id', '=', $user->region_id)
+                            ->where('dem.statut', '=', $stat)
+                            ->orWhere('dem.statut', '=', 'Signé')
+                            ->get();
                 }
-                // Ajoutez le document associé au type de document
-                $typesAndDocuments[$typeDocumentId]['documents'][] = [
-                    'docs_id' => $pieceJointe->docs_id,
-                    'libelleDocument' => $pieceJointe->libelleDocument,
-                ];
-            } */
-            // ['demandes'=>$demandes,'controler'=>$this,"rub"=>$rub,"srub"=>$srub]
+                // Niveau Province
+                
+                else if($user->niveauAction == 3){
+                    $stat = "Paye";
+                    $demandes = DB::table('demandes as dem')
+                            ->select('dem.*',
+                                    'village.id as village_id',
+                                    'village.slug as nom_village',
+                                    'commune.id as commune_id',
+                                    'commune.slug as nom_commune',
+                                    'province.id as province_id',
+                                    'province.slug as nom_province',
+                                    'region.id as region_id',
+                                    'region.slug as nom_region',
+                                    'typeEn.id as typeEns_id',
+                                    'typeEn.libelle')
+                            ->join('typeenseignements as typeEn', 'typeEn.id', '=', 'dem.typeenseignement_id')
+                            ->join('localites as village', 'village.id', '=', 'dem.localite_id')
+                            ->leftJoin('localites as commune', 'commune.id', '=', 'village.parent_id')
+                            ->leftJoin('localites as province', 'province.id', '=', 'commune.parent_id')
+                            ->leftJoin('localites as region', 'region.id', '=', 'province.parent_id')
+                            ->where('province.id', '=', $user->province_id)
+                            ->where('dem.statut', '=', $stat)
+                            ->orWhere('dem.statut', '=', 'Signé')
+                            ->orWhere('dem.statut', '=', 'Province')
+                            ->get();
+                }
+
+                // Niveau SG
+                else if($user->niveauAction == 0){
+                    $stat = "SG";
+                    $demandes = DB::table('demandes as dem')
+                            ->select('dem.*',
+                                    'village.id as village_id',
+                                    'village.slug as nom_village',
+                                    'commune.id as commune_id',
+                                    'commune.slug as nom_commune',
+                                    'province.id as province_id',
+                                    'province.slug as nom_province',
+                                    'region.id as region_id',
+                                    'region.slug as nom_region',
+                                    'typeEn.id as typeEns_id',
+                                    'typeEn.libelle')
+                            ->join('typeenseignements as typeEn', 'typeEn.id', '=', 'dem.typeenseignement_id')
+                            ->join('localites as village', 'village.id', '=', 'dem.localite_id')
+                            ->leftJoin('localites as commune', 'commune.id', '=', 'village.parent_id')
+                            ->leftJoin('localites as province', 'province.id', '=', 'commune.parent_id')
+                            ->leftJoin('localites as region', 'region.id', '=', 'province.parent_id')
+                            ->where('dem.statut', '=', $stat)
+                            ->get();
+                }
+            }
         return view('procedure/index',[
+            'demandes'=>$demandes,
             'controler'=>$this,
-            'regions' => Localite::where('parent_id',NULL)->orderby('libelleLocalite','asc')->get(),
-            'libelle' => Typeenseignement::orderBy('created_at','DESC')->get(),
-            'secteurs' => Secteur::orderBy('id', 'ASC')->get(),
-            'demandes' => Auth::user()->demandes,
             'rub'=>10,'srub'=>13
         ]);
     }

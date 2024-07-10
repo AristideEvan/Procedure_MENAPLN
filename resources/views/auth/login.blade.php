@@ -3,11 +3,13 @@
 @section('content')
 <br/>
  
-<div class="container">
-    <div class="row justify-content-center align-items-center mb-4">
-        <div class="alert alert-secondary col-7" role="alert">
-        <h6>  1. Si c'est votre première fois, s'inscrivez-vous en appuyant sur le bouton "S'inscrire".</h6><br/> 
-        <h6>  2. Si vous avez déjà un compte, saisissez vos identifiants et votre mot de passe que vous avez crée en 1.</h6>  
+<div class="container"> 
+    <div class="row justify-content-center align-items-center mb-4" >
+        <div class="alert alert-secondary col-7" style="background-color:#F5F5F5;" role="alert">
+            <ol>
+                <li> <mark> Si a c'est votre première fois, s'inscrivez-vous en appuyant sur le bouton "S'inscrire".               </mark></li><br/> 
+                <li> <mark> Si vous avez déjà un compte, saisissez vos identifiants et votre mot de passe que vous avez crée en 1. </mark></li> 
+            </ol>
         </div>
     </div>
     <div class="row justify-content-center" style="margin:0px 0px 600px 0px;" >
@@ -63,7 +65,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -72,7 +74,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">

@@ -6,10 +6,10 @@
 <!-- Experience Start -->
 <div class="services-item bg-light">
     <div class="p-4 text-center ">
-        <div class="services-content-icon">
+        {{-- <div class="services-content-icon">
             <a href="{{ route('registerClient') }}" class="btn btn-primary text-white px-3 py-1 rounded-pill">S'inscrire</a>
             <a href="{{ route('showLoginForm') }}" class="btn btn-secondary text-white px-3 py-1 rounded-pill">Se Connecter</a>
-        </div>
+        </div> --}}
     </div>
 </div>
 <style>
@@ -88,7 +88,13 @@
             </div>
         </div>
     </div>
+
+
+
+    
 </div>
+
+
 
 
 {{-- <div class="row">

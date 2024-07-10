@@ -18,13 +18,13 @@ class AuthRouteMethods
             $this->group(['namespace' => $namespace], function() use($options) {
                 // Login Routes...
                 if ($options['login'] ?? true) {
-                    $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+                    $this->get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('auth');
                     $this->post('login', 'Auth\LoginController@login');
                 }
 
                 // Logout Routes...
                 if ($options['logout'] ?? true) {
-                    $this->post('logout', 'Auth\LoginController@logout')->name('logout');
+                    $this->post('logout', 'Auth\LoginController@logout')->name('logout')->middleware('auth');
                 }
 
                 // Registration Routes...
@@ -34,7 +34,7 @@ class AuthRouteMethods
                 }
 
                 if ($options['registerClient'] ?? true) {
-                    $this->get('registerClient', 'Auth\RegisterController@showClientRegistrationForm')->name('registerClient');
+                    $this->get('registerClient', 'Auth\RegisterController@showClientRegistrationForm')->name('registerClient')->middleware('auth');
                     $this->post('registerClient', 'Auth\RegisterController@clientRegister');
                 }
                 // Password Reset Routes...

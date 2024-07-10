@@ -226,7 +226,10 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect('/showLoginForm');
+            // : redirect('/showLoginForm');
+            : redirect('login');
+
+
     }
 
     /**

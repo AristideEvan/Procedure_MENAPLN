@@ -6,9 +6,9 @@
     <div class="row justify-content-center" style="margin:110px 0px 600px 0px;">
         <div class="col-md-8">
             <div class="card"> 
-                <div class="card-header bg-primary text-white">{{ __('Veuillez renseigner vos références') }}</div>
+                <div class="card-header bg-primary text-white ">{{ __('Saisir les références d’une demande') }}</div>
                     
-                <div class="card-body">
+                <div class="card-body card-shadow2 bg-light">
                 
                     <form method="POST" action="{{ route('findFollowRequest') }}">
                         @csrf

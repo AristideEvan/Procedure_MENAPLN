@@ -12,7 +12,7 @@
                  </div>
                  <br/> 
                     <h4 class="card-title">
-                        {{__('Liste de mes créations')}}
+                        {{__('Liste de mes demandes')}}
                     </h4>
                 </div>
                 <div class="card-body table-responsive">

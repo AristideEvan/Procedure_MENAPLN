@@ -38,23 +38,17 @@ use App\Http\Controllers\MenuPromoteur;
         <div class="page-wrapper">
         
             <!-- MENU SIDEBAR-->
-            <aside class="menu-sidebar" d-none d-lg-block style="background:rgb(192,192,192)">
-                {{-- <div class="logo" style="background: linear-gradient(to right, #143ffd,rgba(255, 0, 0, 0.642),  #006600); color: #ffffff">  --}}
-                <div class="logo align-center" style="background:rgb(192,192,192)" >   {{-- couleur grise --}}
-                        <a class="">
-                         <img src="/images/armoirie.png" alt="armoirie bf" width="60px" height="30px"/>
-                            {{-- <h1 class="text-white fw-bold d-block">SIGEPCE</h1> --}}
-                        </a>
+            <aside class="menu-sidebar py-1" d-none d-lg-block style="background-color:#979797;">
+                <div class="row justify-content-center algin-items-center" style="background-color:#979797;" >   {{-- couleur grise --}}
+                    <img src="{{asset("/images/armoirie.png")}}" alt="armoirie" style="width: 20%;"/>
                 </div>
                 {{-- <div class="scrollbar-sidebar" style="background-color: #1578fb78;"> --}}
-                <div class="scrollbar-sidebar">
+                <div class="scrollbar-sidebar py-1">
                     <div class="app-sidebar__inner">
-                     
-
                         <ul class="vertical-nav-menu">
                             @foreach (session('menus') as $key=>$item)
                                 <div class="card">
-                                    <div class="card-header enteteMenu btn" id="heading{{ $loop->iteration }}">
+                                    {{-- <div class="card-header enteteMenu btn" id="heading{{ $loop->iteration }}">
                                         <li class="libeleentete" id="collaps-{{ $loop->iteration }}" onclick="Collapser(this.id);"data-toggle="collapse" data-target="#collapse{{ $loop->iteration }}"
                                                 aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}" style="background-color: blue;
                                                 color: white;
@@ -62,23 +56,22 @@ use App\Http\Controllers\MenuPromoteur;
                                                 padding-left: 10px;
                                                 height: 45px;
                                                 padding-top: -10px;
-                                                {{-- vertical-align: middle; --}}
                                                 border-bottom: 1px;">
                                                 {{$item[0]->nomMenu}}
                                     
                                         </li>
-                                     </div>
+                                    </div> --}}
                                 <div id="collapse-{{ $loop->iteration }}" class="collapse" aria-labelledby="heading{{ $loop->iteration }}" data-parent="#accordionExample">
                                     <div class="card-body corpsMenu">
                                         @if (!empty($item[1]) )
                                         @foreach ($item[1] as $skey => $sousMenu)
                                         @php $test= "route" ; @endphp
-                                        <li style="color:black;font-size:15px;">
-                                            <a style="color:black;" href="{{ $test($sousMenu[0]->lien)  }}/{{$item[0]->id}}/{{$sousMenu[0]->id}}" id="sousMenu{{$sousMenu[0]->id}}">
-                                                <i class="metismenu-icon"></i>
-                                                {{$sousMenu[0]->nomMenu}}
-                                            </a>
-                                        </li>
+                                            <li style="color:black;font-size:15px;">
+                                                <a style="color:black;" href="{{ $test($sousMenu[0]->lien)  }}/{{$item[0]->id}}/{{$sousMenu[0]->id}}" id="sousMenu{{$sousMenu[0]->id}}">
+                                                    <i class="metismenu-icon"></i>
+                                                    {{$sousMenu[0]->nomMenu}}
+                                                </a>
+                                            </li>
                                         @endforeach
                                         @endif
                                     
@@ -98,7 +91,7 @@ use App\Http\Controllers\MenuPromoteur;
                     <div class="container-fluid">
                         <div class="header-wrap d-flex justify-content-end">
                             <div class="header-button">
-                                <div class="noti-wrap">
+                                {{-- <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications"></i>
                                         <span class="quantity"></span>
@@ -138,11 +131,11 @@ use App\Http\Controllers\MenuPromoteur;
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('images/avatar-06.jpg')}}" alt="John Doe" />
+                                            <img src="{{ asset('images/utilisateur.png')}}" alt="utilisateur" style="width:30%;"/>
                                         </div>
                                         <div class="content" >
                                             <a class="js-acc-btn" style="color:white;" href="#">{{ Auth::user()->username }}</a>
@@ -151,7 +144,7 @@ use App\Http\Controllers\MenuPromoteur;
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('images/avatar-06.jpg')}}" alt="John Doe" />
+                                                        <img src="{{ asset('images/utilisateur.png')}}" alt="utilisateur" style="width:30%;" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -313,7 +306,7 @@ use App\Http\Controllers\MenuPromoteur;
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des Creations') }}</h5>
+                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des Créations') }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>

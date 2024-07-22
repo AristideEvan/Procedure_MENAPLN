@@ -1,4 +1,6 @@
-@extends('layouts.dashboardTemplate')
+{{-- @extends('layouts.dashboardTemplate') --}}
+@extends((((Auth::user()->profil->nomProfil == 'Promoteur'  ? 'layouts.dashboardTemplate' : Auth::user()->profil->nomProfil == 'PROVINCE') ? 'layouts.metier' : (Auth::user()->profil->nomProfil == 'REGION' ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'DEP'))  ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'SG') ? 'layouts.metier' : 'layouts.superadmin')
+
 @section('content')
     <div class="card">
         <div class="card-header">
@@ -33,12 +35,11 @@
                                 onclick="changerEtatCompte(this.id,'')" 
                                 @if($item->actif) title="Desactiver cet utilisateur" @else title="Activer cet utilisateur" @endif>
                                 @if($item->actif) <i class="fas fa-times" style="color: #F00"></i> @else <i class="fas fa-check-circle" style="color: #060"></i> @endif    
+
                             </a>
-{{-- 
-                            <a href="{{ route('user.edit',$item->id) }}" title="Modifier"><i class="fa fa-pencil-alt" style="color: #060" aria-hidden="true"></i></a>
-                            <a href="{{ route('user.destroy',$item->id) }}" title="Supprimer"><i class="fa fa-trash-alt" style="color: #F00" aria-hidden="true"></i></a> --}}
                         </td>
                         <td> @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'user.edit','user.destroy',$item->id); @endphp </td>
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -46,3 +47,6 @@
         </div>
     </div>
 @endsection
+                            {{-- 
+                            <a href="{{ route('user.edit',$item->id) }}" title="Modifier"><i class="fa fa-pencil-alt" style="color: #060" aria-hidden="true"></i></a>
+                            <a href="{{ route('user.destroy',$item->id) }}" title="Supprimer"><i class="fa fa-trash-alt" style="color: #F00" aria-hidden="true"></i></a> --}}

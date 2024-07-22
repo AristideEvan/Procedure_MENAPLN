@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,16 +19,32 @@ class Controller extends BaseController
     public function parametre_exists($rub,$srub,$param){
         return (in_array($param,$this->parametre($rub,$srub)))?true:false;
     }
+     
     public function newFormButton($rub,$srub,$lien){
-        $vue = '';
-        $route = 'route';
-        // dd(session('menus'));
-        if(array_key_exists(1,session('menus')[$rub][1][$srub]) && in_array("Créer",session('menus')[$rub][1][$srub][1])){
-            $vue .= '<a href="'.$route($lien).'/'.$rub.'/'.$srub.'">';
-            $vue .= '<input value="Nouveau" type="button" class="btn btn-primary btnEnregistrer" style="float:right">';
-            $vue .= '</a>';
+        if (Auth::user()->profil->nomProfil=='Root'){
+            $vue = '';
+            $route = 'route';
+            // dd(session('menus'));
+            if(array_key_exists(1,session('menus')[$rub][1][$srub]) && in_array("Créer",session('menus')[$rub][1][$srub][1])){
+                $vue .= '<a href="'.$route($lien).'/'.$rub.'/'.$srub.'">';
+                $vue .= '<input value="Nouveau" type="button" class="btn btn-primary btnEnregistrer" style="float:right">';
+                $vue .= '</a>';
+           } 
+           return $vue;
+        }else{
+            $vue = '';
+            $route = 'route';
+            // dd(session('menus'));
+            if(array_key_exists(1,session('menus')[$rub][1][$srub]) && in_array("Créer",session('menus')[$rub][1][$srub][1])){
+                $vue .= '<a href="'.$route($lien).'/'.$rub.'/'.$srub.'">';
+                $vue .= '<input value="Nouvelle demande" type="button" class="btn btn-primary btnEnregistrer" style="float:right">';
+                $vue .= '</a>';
+           } 
+           return $vue;
+       
         }
-        return $vue;
+            
+                   
     }
     public function crudheader($rub,$srub){
         $head = '';
@@ -45,7 +62,7 @@ class Controller extends BaseController
         //dd($id);
         $lienpay = 'procedure.updateStatut';
         $lienmouvement = 'procedure.updateMouvement';
-    //public function crudbody($rub,$srub,$route,$lienm,$liens,$id,$type=null){
+        //public function crudbody($rub,$srub,$route,$lienm,$liens,$id,$type=null){
         $body = '';
         if(array_key_exists(1,session('menus')[$rub][1][$srub])){
             if(array_key_exists(1,session('menus')[$rub][1][$srub])){
@@ -142,7 +159,6 @@ class Controller extends BaseController
         }
         return $body;
     }
-
 
     public function crudbodyAlt($rub,$srub,$route,$lienm,$liens,$id){
         $body = '';

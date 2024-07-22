@@ -1,4 +1,5 @@
-@extends('layouts.dashboardTemplate')
+{{-- @extends('layouts.dashboardTemplate') --}}
+@extends((((Auth::user()->profil->nomProfil == 'Promoteur'  ? 'layouts.dashboardTemplate' : Auth::user()->profil->nomProfil == 'PROVINCE') ? 'layouts.metier' : (Auth::user()->profil->nomProfil == 'REGION' ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'DEP'))  ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'SG') ? 'layouts.metier' : 'layouts.superadmin')
 
 @section('content')
 <div class="container-fluid">
@@ -13,7 +14,9 @@
                 <tr>
                     <th>{{__('Type Document')}} </th>
                     <th>{{__('Document')}} </th>
-                    @php echo $controler->crudheader($rub,$srub); @endphp
+                    <th>{{__('Actions')}} </th>
+
+                    {{-- @php echo $controler->crudheader($rub,$srub); @endphp --}}
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +24,7 @@
                     <tr>
                         <td>{{$item->libelle}}</td>
                         <td>{{$item->libelleDocument}}</td>
-                        @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'document.edit','document.destroy',$item->id); @endphp
+                        <td>@php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'document.edit','document.destroy',$item->id); @endphp </td>
                     </tr>
                 @endforeach
             </tbody>

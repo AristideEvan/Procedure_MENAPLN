@@ -43,7 +43,7 @@
     <div class="row">
     
         <div class="col-sm-4">
-            <div class="card card-shadow ">
+            <div class="card card-shadow py-2">
             <div class="row justify-content-center algin-items-center mb-3">
                 <img src="{{asset("/images/etablissement.png")}}" alt="etablissement" style="width: 15%;"/>
             </div>    
@@ -55,7 +55,7 @@
 
         </div>
         <div class="col-sm-4">
-            <div class="card card-shadow">
+            <div class="card card-shadow py-2">
             <div class="row justify-content-center algin-items-center mb-3">
                 <img src="{{asset("/images/creation_etablissement.png")}}" alt="création enseignement" style="width: 16%;"/>
             </div> 
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="card card-shadow">
+            <div class="card card-shadow py-2">
             <div class="row justify-content-center algin-items-center mb-3">
                 <img src="{{asset("/images/enseignement.png")}}" alt="enseignement" style="width: 20%;"/>
             </div> 

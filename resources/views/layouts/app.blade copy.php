@@ -131,9 +131,9 @@
                     <div class="col">
                         <a href="#" class="d-flex justify-content-center h4 text-white">Contactez-nous</a>
                         <div class="justify-content-center text-white mt-3 d-flex flex-column contact-link">
-                            <a href="#" class="pb-2 text-light border-bottom border-primary"><i class="fas fa-map-marker-alt text-secondary me-2"></i> BP Ouagadougou</a>
-                            <a href="#" class="py-2 text-light border-bottom border-primary"><i class="fas fa-phone-alt text-secondary me-2"></i> +226 64871698</a>
-                            <a href="#" class="py-2 text-light border-bottom border-primary"><i class="fas fa-envelope text-secondary me-2"></i> contact@menapln.gov.bf</a>
+                            <a href="#" class="pb-2 text-light border-bottom border-primary"><i class="fas fa-map-marker-alt me-2"></i> BP Ouagadougou 100</a>
+                            <a href="#" class="py-2 text-light border-bottom border-primary"><i class="fas fa-phone-alt me-2"></i> +226 64871698</a>
+                            <a href="#" class="py-2 text-light border-bottom border-primary"><i class="fas fa-envelope me-2"></i> contact@menapln.gov.bf</a>
                         </div>  
                     </div>
 

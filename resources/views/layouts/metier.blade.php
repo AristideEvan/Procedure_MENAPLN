@@ -38,8 +38,8 @@
         <div class="page-wrapper">
         
             <!-- MENU SIDEBAR-->
-            <aside class="menu-sidebar py-1" d-none d-lg-block style="background-color:#979797;">
-                <div class="row justify-content-center algin-items-center" style="background-color:#979797;" >   {{-- couleur grise --}}
+            {{-- <aside class="menu-sidebar py-1" d-none d-lg-block style="background-color:#979797;">
+                <div class="row justify-content-center algin-items-center" style="background-color:#979797;" >
                     <img src="{{asset("/images/armoirie.png")}}" alt="armoirie bf" style="width: 20%;"/>
                 </div>
                 <div class="scrollbar-sidebar py-1">
@@ -47,19 +47,6 @@
                         <ul class="vertical-nav-menu">
                             @foreach (session('menus') as $key=>$item)
                                 <div class="card">
-                                    {{-- <div class="card-header enteteMenu btn" id="heading{{ $loop->iteration }}">
-                                        <li class="libeleentete" id="collaps-{{ $loop->iteration }}" onclick="Collapser(this.id);"data-toggle="collapse" data-target="#collapse{{ $loop->iteration }}"
-                                                aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}" style="background-color: blue;
-                                                color: white;
-                                                font-weight: bold;
-                                                padding-left: 10px;
-                                                height: 45px;
-                                                padding-top: -10px;
-                                                border-bottom: 1px;">
-                                                {{$item[0]->nomMenu}}
-                                    
-                                        </li>
-                                    </div> --}}
                                 <div id="collapse-{{ $loop->iteration }}" class="collapse" aria-labelledby="heading{{ $loop->iteration }}" data-parent="#accordionExample">
                                     <div class="card-body corpsMenu">
                                         @if (!empty($item[1]) )
@@ -80,15 +67,32 @@
                         </ul>
                     </div>
                 </div>
-            </aside>
+            </aside>  --}}
+
             <!-- END MENU SIDEBAR-->
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <header class="header-desktop"  style="background-color: blue; color: #ffffff">
+            <header class="py-2"  style="background-color: #4052d6;
+            -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0px;  
+            /* left: 300px;   */
+            height: 75px;
+            z-index: 3;">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="header-wrap d-flex justify-content-end">
+                                <div class="header-wrap">
+                                
+                                 <div class="d-flex justify-content-start">
+                                <img src="{{asset("/images/armoirie.png")}}" alt="armoirie" style="width: 7%;"/>
+
+                            </div>
+                                <div class="d-flex justify-content-end">
                             <div class="header-button">
                                 {{-- <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -174,6 +178,9 @@
                                 </div>
                             </div>
                         </div>
+                            </div>
+                            
+                        
                     </div>
                 </div>
             </header>

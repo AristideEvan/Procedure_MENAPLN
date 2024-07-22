@@ -8,15 +8,15 @@
             </button>
             </div> 
             <div class="modal-body" style="height:50%">
-                <h4 class="fichierDetail">{{__('Informations sur la Création')}}</h4>
+                <h4 class="fichierDetail">{{__('Informations sur la demande')}}</h4>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>{{ __('Type Enseignement') }}</th>
                             <th>{{ __('Nom Etablissement') }}</th>
                             <th>{{ __('Superficie') }}</th>
-                            <th>{{ __('Reference') }}</th>
-                            <th>{{ __('Localite') }}</th>
+                            <th>{{ __('Référence') }}</th>
+                            <th>{{ __('Localité') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <h5>{{__('Liste des Commentaires')}}</h5>
+                <h5>{{__('Liste des commentaires')}}</h5>
                 <table class="table table-hover">
                     <thead>
                         <tr>

@@ -1,5 +1,5 @@
-{{-- @extends('layouts.app') --}}
-@extends(Auth::user()->profil->nomProfil != 'Promoteur' ? 'layouts.metier' : 'layouts.dashboardTemplate')
+{{-- @extends(Auth::user()->profil->nomProfil != 'Promoteur' ? 'layouts.metier' : 'layouts.dashboardTemplate') --}}
+@extends((((Auth::user()->profil->nomProfil == 'Promoteur'  ? 'layouts.dashboardTemplate' : Auth::user()->profil->nomProfil == 'PROVINCE') ? 'layouts.metier' : (Auth::user()->profil->nomProfil == 'REGION' ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'DEP'))  ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'SG') ? 'layouts.metier' : 'layouts.superadmin')
 
 @section('content')
 

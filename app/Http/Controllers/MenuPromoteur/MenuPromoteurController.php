@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class MenuPromoteurController extends Controller
 {
     public function makeRequest(){
-            $user = Auth::user();
+        $user = Auth::user();
             if($user->niveauAction == null){ 
               //  dd($user->id);
                 $demandes = DB::table('demandes as dem')

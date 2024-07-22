@@ -38,27 +38,42 @@ use App\Http\Controllers\MenuPromoteur;
         <div class="page-wrapper">
         
             <!-- MENU SIDEBAR-->
-            {{-- <aside class="menu-sidebar py-1" d-none d-lg-block style="background-color:#979797;">
-                <div class="row justify-content-center algin-items-center" style="background-color:#979797;" >
-                    <img src="{{asset("/images/armoirie.png")}}" alt="armoirie" style="width: 20%;"/>
+            <aside class="menu-sidebar py-1" d-none d-lg-block style="background:rgb(192,192,192)">
+                <div class="logo align-center " style="background:rgb(192,192,192)" >   {{-- couleur grise --}}
+                       <div class="row justify-content-center algin-items-center mb-3">
+                          <img src="{{asset("/images/armoirie.png")}}" alt="armoirie" style="width: 20%;"/>
+                       </div>
                 </div>
-                <div class="scrollbar-sidebar py-1">
+                <div class="scrollbar-sidebar">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
                             @foreach (session('menus') as $key=>$item)
                                 <div class="card">
+                                    <div class="card-header enteteMenu btn" id="heading{{ $loop->iteration }}">
+                                        <li class="libeleentete" id="collaps-{{ $loop->iteration }}" onclick="Collapser(this.id);"data-toggle="collapse" data-target="#collapse{{ $loop->iteration }}"
+                                                aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}" style="background-color: gray;
+                                                color: white;
+                                                font-weight: bold;
+                                                padding-left: 10px;
+                                                height: 45px;
+                                                padding-top: -10px;
+                                                vertical-align: middle;
+                                                border-bottom: 1px;">
+                                                {{$item[0]->nomMenu}}
                                     
+                                        </li>
+                                     </div>
                                 <div id="collapse-{{ $loop->iteration }}" class="collapse" aria-labelledby="heading{{ $loop->iteration }}" data-parent="#accordionExample">
                                     <div class="card-body corpsMenu">
                                         @if (!empty($item[1]) )
                                         @foreach ($item[1] as $skey => $sousMenu)
                                         @php $test= "route" ; @endphp
-                                            <li style="color:black;font-size:15px;">
-                                                <a style="color:black;" href="{{ $test($sousMenu[0]->lien)  }}/{{$item[0]->id}}/{{$sousMenu[0]->id}}" id="sousMenu{{$sousMenu[0]->id}}">
-                                                    <i class="metismenu-icon"></i>
-                                                    {{$sousMenu[0]->nomMenu}}
-                                                </a>
-                                            </li>
+                                        <li style="color:black;font-size:15px;">
+                                            <a style="color:black;" href="{{ $test($sousMenu[0]->lien)  }}/{{$item[0]->id}}/{{$sousMenu[0]->id}}" id="sousMenu{{$sousMenu[0]->id}}">
+                                                <i class="metismenu-icon"></i>
+                                                {{$sousMenu[0]->nomMenu}}
+                                            </a>
+                                        </li>
                                         @endforeach
                                         @endif
                                     
@@ -68,32 +83,15 @@ use App\Http\Controllers\MenuPromoteur;
                         </ul>
                     </div>
                 </div>
-            </aside> --}}
-
-            
+            </aside>
             <!-- END MENU SIDEBAR-->
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <header class="py-2"  style="background-color: #4052d6;
-                -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-                -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-                box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-                position: fixed;
-                top: 0;
-                right: 0;
-                left: 300px;  
-                /* left: 300px;   */
-                height: 75px;
-                z-index: 3;">
+            <header class="header-desktop"  style="background-color: blue; color: #ffffff">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                    <div class="header-wrap">
-                            <div class="d-flex justify-content-start">
-                                <img src="{{asset("/images/armoirie.png")}}" alt="armoirie" style="width: 7%;"/>
-                            </div>
-                        
-                        <div class="d-flex justify-content-end">
+                        <div class="header-wrap d-flex justify-content-end">
                             <div class="header-button">
                                 {{-- <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -139,7 +137,7 @@ use App\Http\Controllers\MenuPromoteur;
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('images/utilisateur.png')}}" alt="utilisateur" style="width:30%;"/>
+                                            <img src="{{ asset('images/utilisateur.png')}}" alt="Utilisateur" />
                                         </div>
                                         <div class="content" >
                                             <a class="js-acc-btn" style="color:white;" href="#">{{ Auth::user()->username }}</a>
@@ -148,7 +146,7 @@ use App\Http\Controllers\MenuPromoteur;
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('images/utilisateur.png')}}" alt="utilisateur" style="width:30%;" />
+                                                        <img src="{{ asset('images/avatar-06.jpg')}}" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -179,9 +177,6 @@ use App\Http\Controllers\MenuPromoteur;
                                 </div>
                             </div>
                         </div>
-                        </div>
-                       
-                        
                     </div>
                 </div>
             </header>
@@ -189,7 +184,7 @@ use App\Http\Controllers\MenuPromoteur;
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <div class="d-flex justify-content-center">
+                    <div class="container-fluid">
                            <div>
 
                               <p>
@@ -313,7 +308,7 @@ use App\Http\Controllers\MenuPromoteur;
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des Créations') }}</h5>
+                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des Creations') }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>

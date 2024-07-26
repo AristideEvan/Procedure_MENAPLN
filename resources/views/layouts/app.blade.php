@@ -2,7 +2,7 @@
 <html lang="en" >
     <head>
         <meta charset="utf-8">
-        <title>E-Procedure - Create your school</title>
+        <title>E-Procedure - Créer votre demande</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -29,9 +29,7 @@
         <link rel="stylesheet" href="{{ asset('fonts/material-icon/css/material-design-iconic-font.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/nouislider/nouislider.min.css') }}">
      
-        
     </head>
-    
     <body style="margin-top:2px;">
 
         <!-- Topbar End -->
@@ -79,7 +77,7 @@
                             
                             <div class="col-4 text-center">
                                 <p>  
-                                Réalisée par la Direction des Systèmes d'Information (DSI/MENAPLN).  
+                                   Réalisée par la Direction des Systèmes d'Information (DSI/MENAPLN).  
                                 </p> 
                             </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Users\ProfilController;
@@ -69,7 +70,7 @@ Route::get('/showLoginForm', [LoginController::class, 'showLoginForm'])->name('s
 //Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
 //Route::post('/users/save', [UserController::class, 'store'])->name('user.save');
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('auth');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -93,7 +94,7 @@ Route::get('user/create/{rub}/{srub}',[UserController::class,'create']);
 Route::get('user/{id}/edit/{rub}/{srub}', [UserController::class,'edit']);
 Route::get('comptenonactif/{rub}/{srub}', [UserController::class,'compteNonValide']);
 Route::get('comptenonactif', [UserController::class, 'compteNonValide'])->name('comptenonactif');
-Route::get('acceuilUser', [UserController::class, 'acceuilUser']);
+Route::get('login', [UserController::class, 'login']);
 Route::get('acceuilAdmin', [UserController::class, 'acceuilAdmin']);
 
 //Profil

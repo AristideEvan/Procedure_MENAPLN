@@ -1,12 +1,8 @@
-<? php 
-use App\Http\Controllers\MenuPromoteur;
-
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>E-Procedure - Create your school</title>
+        <title>E-Procedure - Créer votre demande</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -71,7 +67,7 @@ use App\Http\Controllers\MenuPromoteur;
                                         <li style="color:black;font-size:15px;">
                                             <a style="color:black;" href="{{ $test($sousMenu[0]->lien)  }}/{{$item[0]->id}}/{{$sousMenu[0]->id}}" id="sousMenu{{$sousMenu[0]->id}}">
                                                 <i class="metismenu-icon"></i>
-                                                {{$sousMenu[0]->nomMenu}}
+                                                  {{$sousMenu[0]->nomMenu}}
                                             </a>
                                         </li>
                                         @endforeach
@@ -137,7 +133,7 @@ use App\Http\Controllers\MenuPromoteur;
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('images/utilisateur.png')}}" alt="Utilisateur" />
+                                            <img src="{{ asset('images/utilisateur.png')}}" alt="Utilisateur" width="15px;"/>
                                         </div>
                                         <div class="content" >
                                             <a class="js-acc-btn" style="color:white;" href="#">{{ Auth::user()->username }}</a>
@@ -146,7 +142,7 @@ use App\Http\Controllers\MenuPromoteur;
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('images/avatar-06.jpg')}}" alt="John Doe" />
+                                                        <img src="{{ asset('images/utilisateur.png')}}" alt="Utilisateur" width="15px;"/>
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -157,16 +153,16 @@ use App\Http\Controllers\MenuPromoteur;
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
+                                                {{-- <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Mon Compte</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="account-dropdown__footer">
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();">
-                                                    <i class="zmdi zmdi-power"></i>{{ __('Se Deconnecter') }}
+                                                    <i class="zmdi zmdi-power"></i>{{ __('Se déconnecter') }}
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
@@ -308,7 +304,7 @@ use App\Http\Controllers\MenuPromoteur;
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des Creations') }}</h5>
+                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des demandes') }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -319,7 +315,7 @@ use App\Http\Controllers\MenuPromoteur;
                     @method('post')
                     <!-- Champ pour le commentaire -->
                     <div class="form-group">
-                        <label for="comment">{{ __('Commentaire') }}</label>
+                        <label for="comment">{{ __('Résumé du dossier') }}</label>
                         <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                     </div>
 

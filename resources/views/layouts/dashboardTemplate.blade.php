@@ -1,12 +1,8 @@
-<? php 
-use App\Http\Controllers\MenuPromoteur;
-
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>E-Procedure - Create your school</title>
+        <title>E-Procedure - Créer votre demande</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -159,16 +155,16 @@ use App\Http\Controllers\MenuPromoteur;
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
+                                                {{-- <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Mon Compte</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="account-dropdown__footer">
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();">
-                                                    <i class="zmdi zmdi-power"></i>{{ __('Se Deconnecter') }}
+                                                    <i class="zmdi zmdi-power"></i>{{ __('Se déconnecter') }}
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
@@ -190,12 +186,11 @@ use App\Http\Controllers\MenuPromoteur;
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="d-flex justify-content-center">
-                           <div>
-
+                           {{-- <div>
                               <p>
-                              {{-- Statistiques sur les demandes : --}}
+                              Statistiques sur les demandes :
 
-                              {{-- @if (Auth::user()->profil->nomProfil != 'Promoteur')
+                               @if (Auth::user()->profil->nomProfil != 'Promoteur')
                                 <br/>   
                                     @if(isset($data2))
                                     @php  $som2=$data2->sum('nbredemandestotal')  @endphp 
@@ -204,11 +199,11 @@ use App\Http\Controllers\MenuPromoteur;
                                     </h6>
                                     @endif  
                                 <br/>  
-                              @endif  --}}
+                              @endif  
                                 
                               </p>
 
-                            </div> 
+                            </div>  --}}
                        @yield('content')
                     </div>
                 </div>

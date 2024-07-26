@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>E-Procedure - Create your school</title>
+        <title>E-Procedure - Créer votre demande</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -30,7 +30,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
         <!-- Main CSS-->
-        <link href="{{ asset('css/theme.css') }}" rel="stylesheet" media="all">
+        <link href="{{ asset('css/theme-metier.css') }}" rel="stylesheet" media="all">
     </head>
     
     <body class="animsition">
@@ -79,8 +79,8 @@
             box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
-            right: 0;
-            left: 0px;  
+            right: 2px;
+            left: 2px;  
             /* left: 300px;   */
             height: 75px;
             z-index: 3;">
@@ -158,29 +158,27 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
+                                                {{-- <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Mon Compte</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="account-dropdown__footer">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();">
-                                                    <i class="zmdi zmdi-power"></i>{{ __('Se Deconnecter') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();">
+                                                        <i class="zmdi zmdi-power"></i>{{ __('Se déconnecter') }}
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            </div>
-                            
-                        
+                        </div>    
                     </div>
                 </div>
             </header>
@@ -312,7 +310,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des Creations') }}</h5>
+                <h5 class="modal-title" id="paymentModalLabel">{{ __('Formulaire de Mouvement des demandes') }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -323,7 +321,7 @@
                     @method('post')
                     <!-- Champ pour le commentaire -->
                     <div class="form-group">
-                        <label for="comment">{{ __('Commentaire') }}</label>
+                        <label for="comment">{{ __('Résumé du dossier') }}</label>
                         <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                     </div>
 
@@ -384,6 +382,8 @@
     <script src="{{ asset('vendor/animsition/animsition.min.js')}}"></script>
     <script src="{{ asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
     </script>
+    
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script src="{{ asset('vendor/counter-up/jquery.waypoints.min.js')}}"></script>
     <script src="{{ asset('vendor/counter-up/jquery.counterup.min.js')}}">
     </script>

@@ -1,90 +1,234 @@
+
 @extends((((Auth::user()->profil->nomProfil == 'Promoteur'  ? 'layouts.dashboardTemplate' : Auth::user()->profil->nomProfil == 'PROVINCE') ? 'layouts.metier' : (Auth::user()->profil->nomProfil == 'REGION' ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'DEP'))  ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'SG') ? 'layouts.metier' : 'layouts.superadmin')
-@section('content')
-        <div class="container-fluid" style="margin-top:15px;">
-            <div class="main-card card">
-                <div class="card-header py-1">
-                 <div class="row">
-                        <div class="col-2">
-                             @php echo $controler->newFormButton($rub,$srub,'procedure.create'); @endphp
-                        </div> 
-                 </div>
-                 <br/> 
-                    <h4 class="card-title">
-                        {{__('Liste de mes demandes')}}
-                    </h4>
+    @section('content') 
+        @if (Auth::user()->profil->nomProfil == 'PROVINCE' || Auth::user()->profil->nomProfil == 'REGION' || Auth::user()->profil->nomProfil == 'DEP' || Auth::user()->profil->nomProfil == 'SG')
+            
+                {{-- tableau divisé en deux parties
+                -a gauche tableau de bord
+                -a droite  liste de mes demandes
+                --}}
+            <div class="container" style="margin-top:15px;">
+                <div class="row">
+                    <div class="col-2">{{--  debut de col-2--}} 
+                        <br/>
+                        <div class="main-card card">
+                            <h4 class="card-title">
+                                    {{__('Tableau de bord')}}
+                            </h4>
+                        </div>
+                            <div class="col-md-6 col-lg-3 metier-tableau">
+                                <div class="statistic__item">
+                                    <h2 class="number">{{ $data0 }}</h2>
+                                    <span class="desc">Demandes en cours</span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-folder"></i> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 metier-tableau">
+                                <div class="statistic__item">
+                                    <h2 class="number">{{ $data1 }}</h2>
+                                    <span class="desc">Demandes traitées</span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-refresh-sync"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3 metier-tableau">
+                                <div class="statistic__item">
+                                    <h2 class="number">{{ $data2 }}</h2>
+                                    <span class="desc">Demandes à modifier</span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-border-color"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-md-6 col-lg-3 metier-tableau">
+                                <div class="statistic__item">
+                                    <h2 class="number">{{ $data3 }}</h2>
+                                    <span class="desc">Nombre de Demandes</span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-functions"></i>
+                                    </div>
+                                </div>
+                            </div> --}}
+                    </div> {{-- fin de col-2 --}}      
+            
+                    <div class="col-10">{{--  debut de col-10--}}
+                        <div class="main-card card">
+                                    <div class="card-header py-1">
+                                        <div class="row">
+                                                <div class="col-2">
+                                                    @php echo $controler->newFormButton($rub,$srub,'procedure.create'); @endphp
+                                                </div> 
+                                        </div>
+                                            <br/> 
+                                            <h4 class="card-title">
+                                                {{__('Liste de mes demandes')}}
+                                            </h4>
+                                    </div>
+                                                    
+                            <div class="card-body table-responsive">
+                                    <table id="example" class="table table-striped table-bordered">
+                                        <thead >
+                                            <tr>
+                                                <th>Type Enseignement</th>
+                                                <th>Nom Etablissement</th>
+                                                <th>Superficie</th>
+                                                <th>Références</th>
+                                                <th>Localité</th>
+                                                <th>Statut</th>
+                                                <th>Actions</th>
+                                                {{-- <th></th> --}}
+                                                {{-- @php $controler->crudheader($rub,$srub); @endphp --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($demandes as $item)
+                                                <tr>
+                                                    <td>{{$item->libelle}}</td>
+                                                    <td>{{$item->nomEtablissement}}</td>
+                                                    <td>{{$item->superficie}}</td>
+                                                    <td>{{$item->reference}}</td>
+                                                    <td>{{$item->nom_village}}</td>
+                                                    <td @if($item->statut =='Non Paye') style="color: red" @elseif($item->statut=="Paye") style="color: orange"
+                                                    @elseif($item->statut=="Signé") style="color: green" @else style="color: green" @endif >
+                                                    @if($item->statut =='Non Paye')
+                                                        Non Payé
+                                                    @elseif($item->statut=="Paye")
+                                                        Payé
+                                                    @elseif($item->statut=="Signé")
+                                                        Signé
+                                                    @elseif($item->statut=="Region")
+                                                        Région
+                                                    @elseif($item->statut=="Province")
+                                                        Province
+                                                    @elseif($item->statut=="DEP")
+                                                        DEP
+                                                    @elseif($item->statut=="SG")
+                                                        SG
+                                                    @elseif($item->statut=="Pour Modification")
+                                                        A modifier
+                                                    @endif
+                                                    </td>
+                                                    <td style="text-align: right">
+                                                            @if(Auth::user()->niveauAction !=null && ($item->statut == "Non Paye" || 
+                                                                $item->statut=="SG" || 
+                                                                $item->statut=="DEP" || 
+                                                                $item->statut=="Province" ||
+                                                                $item->statut=="Paye" ||   
+                                                                $item->statut=="Region"))
+                                                                <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails1" >  <i class="fa fa-align-justify styleedit"  ></i></a> 
+                                                                {{-- @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp --}}
+                                                                @php $route = 'route'; echo $controler->crudbody_metier($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp
+                                                            
+                                                            @elseif(Auth::user()->niveauAction ==null && ($item->statut == "Pour Modification" || $item->statut == "Non Paye"))
+                                                                @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp
+                                                                <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails2" >  <i class="fa fa-align-justify styleedit"  ></i></a>
+                                                            @else
+                                                                <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails3" >  <i class="fa fa-align-justify styleedit"  ></i></a>
+                                                            @endif
+                                                            {{-- @php $controler->crudheader($rub,$srub); @endphp --}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody> 
+                                    </table>
+                                </div>           
+                            </div> 
+                        </div>{{--  fin de col-10--}}
+                    </div>{{-- fin de row --}}
+                </div>{{-- fin de container --}}
+        @endif   
+            @if (Auth::user()->profil->nomProfil == 'Promoteur')
+                <div class="container-fluid" style="margin-top:15px;">
+                    <div class="main-card card">
+                        <div class="card-header py-1">
+                            <div class="row">
+                                    <div class="col-2">
+                                        @php echo $controler->newFormButton($rub,$srub,'procedure.create'); @endphp
+                                    </div> 
+                            </div>
+                                <br/> 
+                                <h4 class="card-title">
+                                    {{__('Liste de mes demandes')}}
+                                </h4>
+                        </div>
+                                        
+                        <div class="card-body table-responsive">
+                        <table id="example" class="table table-striped table-bordered">
+                            <thead >
+                                <tr>
+                                    <th>Type Enseignement</th>
+                                    <th>Nom Etablissement</th>
+                                    <th>Superficie</th>
+                                    <th>Références</th>
+                                    <th>Localité</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                    {{-- <th></th> --}}
+                                    {{-- @php $controler->crudheader($rub,$srub); @endphp --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($demandes as $item)
+                                    <tr>
+                                        <td>{{$item->libelle}}</td>
+                                        <td>{{$item->nomEtablissement}}</td>
+                                        <td>{{$item->superficie}}</td>
+                                        <td>{{$item->reference}}</td>
+                                        <td>{{$item->nom_village}}</td>
+                                        <td @if($item->statut =='Non Paye') style="color: red" @elseif($item->statut=="Paye") style="color: orange"
+                                        @elseif($item->statut=="Signé") style="color: green" @else style="color: green" @endif >
+                                        @if($item->statut =='Non Paye')
+                                            Non Payé
+                                        @elseif($item->statut=="Paye")
+                                            Payé
+                                        @elseif($item->statut=="Signé")
+                                            Signé
+                                        @elseif($item->statut=="Region")
+                                            Région
+                                        @elseif($item->statut=="Province")
+                                            Province
+                                        @elseif($item->statut=="DEP")
+                                            DEP
+                                        @elseif($item->statut=="SG")
+                                            SG
+                                        @elseif($item->statut=="Pour Modification")
+                                            A modifier
+                                        @endif
+                                        </td>
+                                        <td style="text-align: right">
+                                                @if(Auth::user()->niveauAction !=null && ($item->statut == "Non Paye" || 
+                                                    $item->statut=="SG" || 
+                                                    $item->statut=="DEP" || 
+                                                    $item->statut=="Province" ||
+                                                    $item->statut=="Paye" ||   
+                                                    $item->statut=="Region"))
+                                                    <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails1" >  <i class="fa fa-align-justify styleedit"  ></i></a> 
+                                                    {{-- @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp --}}
+                                                    @php $route = 'route'; echo $controler->crudbody_metier($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp
+                                                
+                                                @elseif(Auth::user()->niveauAction ==null && ($item->statut == "Pour Modification" || $item->statut == "Non Paye"))
+                                                    @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'procedure.edit','procedure.updateMouvement',$item->id); @endphp
+                                                    <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails2" >  <i class="fa fa-align-justify styleedit"  ></i></a>
+                                                @else
+                                                    <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails3" >  <i class="fa fa-align-justify styleedit"  ></i></a>
+                                                @endif
+                                                {{-- @php $controler->crudheader($rub,$srub); @endphp --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody> 
+                        </table>
+                    </div>
                 </div>
-                <div class="card-body table-responsive">
-                <table id="example" class="table table-striped table-bordered">
-                    <thead >
-                        <tr>
-                            <th>Type Enseignement</th>
-                            <th>Nom Etablissement</th>
-                            <th>Superficie</th>
-                            <th>Références</th>
-                            <th>Localité</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
-                            {{-- <th></th> --}}
-                            {{-- @php $controler->crudheader($rub,$srub); @endphp --}}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($demandes as $item)
-                            <tr>
-                                <td>{{$item->libelle}}</td>
-                                <td>{{$item->nomEtablissement}}</td>
-                                <td>{{$item->superficie}}</td>
-                                <td>{{$item->reference}}</td>
-                                <td>{{$item->nom_village}}</td>
-                                <td @if($item->statut =='Non Paye') style="color: red" @elseif($item->statut=="Paye") style="color: orange"
-                                @elseif($item->statut=="Signé") style="color: green" @else style="color: green" @endif >
-                                @if($item->statut =='Non Paye')
-                                    Non Payé
-                                @elseif($item->statut=="Paye")
-                                    Payé
-                                @elseif($item->statut=="Signé")
-                                    Signé
-                                @elseif($item->statut=="Region")
-                                    Région
-                                @elseif($item->statut=="Province")
-                                    Province
-                                @elseif($item->statut=="DEP")
-                                    DEP
-                                @elseif($item->statut=="SG")
-                                    SG
-                                @elseif($item->statut=="Pour Modification")
-                                    A modifier
-                                @endif
-                                </td>
-                                <td style="text-align: right">
-                                @if(Auth::user()->niveauAction !=null && ($item->statut == "Non Paye" || 
-                                    $item->statut=="SG" || 
-                                    $item->statut=="DEP" || 
-                                    $item->statut=="Province" ||
-                                    $item->statut=="Paye" ||   
-                                    $item->statut=="Region"))
+                {{-- coté root 
+                    pas de liste de demande
+                
+                    --}}
 
-                                    <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails1" >  <i class="fa fa-align-justify styleedit"  ></i></a> 
-                                    {{-- @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp --}}
-                                    @php $route = 'route'; echo $controler->crudbody_metier($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp
-                                
-                                @elseif(Auth::user()->niveauAction ==null && ($item->statut == "Pour Modification" || $item->statut == "Non Paye"))
-                                    @php $route = 'route'; echo $controler->crudbody($rub,$srub,$route,'procedure.edit','procedure.destroy',$item->id); @endphp
-                                    <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails2" >  <i class="fa fa-align-justify styleedit"  ></i></a>
-                                @else
-                                    <a id="{{ route('procedure.show', $item->id)}}" href="#" onclick="popUp(this.id,'showCreation')" title="Plus de détails3" >  <i class="fa fa-align-justify styleedit"  ></i></a>
-                                
-                                @endif
-                                {{-- @php $controler->crudheader($rub,$srub); @endphp --}}
-
-                                </td>
-
-                            </tr>
-                        @endforeach
-                    </tbody> 
-                </table>
-            </div>
-        </div>
+            @endif
+                
 @endsection
 
-{{-- @endif --}}

@@ -70,7 +70,6 @@ trait RegistersUsers
 
     public function clientRegister(Request $request)
     { 
-
              //validation
             $request->validate([
                 "type_promoteur"=>"required",
@@ -80,8 +79,8 @@ trait RegistersUsers
                 'password'=>"required",
                 'email'=>"required",
                 'telephone'=>"required",
-                'libelle'=>"required",
-                'reference'=>"required",
+               // 'libelle'=>"required",
+                //'reference'=>"required"
             ]);
 
             // enregistrement d'un type promoteur
@@ -109,6 +108,7 @@ trait RegistersUsers
                 $promoteurM->telephone = $request->input('telephone');
                 $promoteurM->save();
             }
+        //dd($promoteurP);    
         $user = new User();
         $user->profil_id = $request->input('profil');
         $user->promoteur_id = $promoteurId;
@@ -116,6 +116,7 @@ trait RegistersUsers
         $user->username = $request->input('identifiant');
         $user->password = bcrypt($request->input('password'));
         $user->save();
+
         Auth::login($user);
         $tableau=[];
         $regions=[];
@@ -151,10 +152,9 @@ trait RegistersUsers
         $localisation[4]='('.$idBon.')';
         Session::put('menus', $tableau);
         Session::put('user', $user);
-        //return redirect($this->redirectPath());
-        return redirect('procedure/'.$request['rub'].'/'.$request['srub'])->with(['success'=>'Opération effectuée avec succès']);
-      
-    
+        //dd($menus);
+        return redirect($this->redirectPath());
+        //return redirect('procedure/'.$request['rub'].'/'.$request['srub'])->with(['success'=>'Opération effectuée avec succès']);
     }
 
     /**

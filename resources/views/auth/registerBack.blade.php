@@ -1,4 +1,6 @@
-@extends('layouts.dashboardTemplate')
+{{-- @extends('layouts.dashboardTemplate') --}}
+@extends((((Auth::user()->profil->nomProfil == 'Promoteur'  ? 'layouts.dashboardTemplate' : Auth::user()->profil->nomProfil == 'PROVINCE') ? 'layouts.metier' : (Auth::user()->profil->nomProfil == 'REGION' ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'DEP'))  ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'SG') ? 'layouts.metier' : 'layouts.superadmin')
+
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -130,7 +132,7 @@
                             </div>
                             <div class="col-md-6">
                                 <fieldset>
-                                    <legend>Infos personnelle</legend>
+                                    <legend>Informations personnelles</legend>
                                     <div class="form-group row">
                                         <label for="matricule" class="col-md-4 col-form-label text-md-right">{{ __('Matricule') }}<span style="color: red">*</span></label>
                                         <div class="col-md-6">

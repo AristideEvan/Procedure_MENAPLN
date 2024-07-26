@@ -393,7 +393,6 @@ public function index($rub = null, $srub=null)
                             ->get();
                 }
             }
-            
             //dd($demandes);
             return view('procedure.index')->with(['demandes'=>$demandes,'controler'=>$this,"rub"=>$rub,"srub"=>$srub]);
         }
@@ -781,7 +780,7 @@ public function destroy($id,$rub=null,$srub=null)
         Demande::where('id', $id)->delete();
         return back()->with(['success'=>'Procedure Supprimée avec succès']);
     }
-
+    
 public function update(Request $request,$id)
     {
         $fct = new Fonction();

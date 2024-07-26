@@ -32,6 +32,42 @@ jQuery('select').select2({
 });
 
 
+jQuery(document).ready(function() {
+    jQuery('#example').DataTable( {
+        "language": {
+            "sProcessing": "Traitement en cours ...",
+            "sLengthMenu": "Afficher _MENU_ lignes",
+            "sZeroRecords": "Aucun résultat trouvé",
+            "sEmptyTable": "Aucune donnée disponible",
+            "sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
+            "sInfoEmpty": "Aucune ligne affichée",
+            "sInfoFiltered": "(Filtrer un maximum de_MAX_)",
+            "sInfoPostFix": "",
+            "sSearch": "Chercher:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Chargement...",
+            "oPaginate": {
+              "sFirst": "Premier", "sLast": "Dernier", "sNext": ">", "sPrevious": "<"
+            },
+            "oAria": {
+              "sSortAscending": ": Trier par ordre croissant", "sSortDescending": ": Trier par ordre décroissant"
+            }
+          },
+          dom: 'Blfrtip',
+          buttons: [
+            //'copyHtml5',
+            'excelHtml5',
+            //'csvHtml5',
+            'pdfHtml5'
+        ],
+          responsive: true,
+          "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tout"]],
+          colReorder: true,
+          ordering: true
+      } );
+  } );
+
 
 /* jQuery(document).ready(function() {
     jQuery('#example').DataTable( {
@@ -156,8 +192,6 @@ function detail(chemin){
 function popUp(chemin,id){
   console.log(chemin);
   jQuery('#envoi').load(chemin, function(){
-
-
     console.log("je suis dans le popup"+id)
     jQuery("#"+id).modal();
 })

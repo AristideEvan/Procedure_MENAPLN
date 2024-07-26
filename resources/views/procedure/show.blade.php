@@ -66,8 +66,7 @@
                                 <td>{{ $comment->nom_fichier }}</td>
                                 
                                 <td>
-                                    <a href="/genererAutorisation/{{ $data[0]->id }}"
-                                        >
+                                    <a href="/genererAutorisation/{{ $data[0]->id }}">
                                         <i class="fa fa-print styleedit"></i>
                                     </a>
                                 </td>
@@ -87,7 +86,6 @@
                         <tbody>
                                 <tr>
                                     <td>Autorisation</td>
-                                    
                                     <td>
                                     @if ($typePromo[0]->typePromoteur_id == 1 && $data[0]->datelettre == NULL)
                                     <a href="#" data-toggle="modal" data-target="#confirmationModal2">
@@ -109,8 +107,17 @@
                     </table>
                 @endif
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <div class="row">
+                <div class="col-2">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div> 
+                <div class="col">   
+                    {{-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Valider</button>
+                    </div> --}}
+                </div>    
             </div>
         </div>
     </div>
@@ -145,7 +152,7 @@
     </div>
 </div>
 
-<!--Deuxime-->
+<!--Deuxieme-->
 <div class="modal fade" id="confirmationModal2" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -290,7 +290,6 @@
                                    
                                     <a href="{{ route('details') }}"><input type="button" id="annuler" value='{{__("Annuler")}}' class="btn btn-primary btnAnnuler col-md-auto"/></a>
                                     <input type="submit" id="valider" value="{{__('Enregistrer')}}" class="btn btn-success btnEnregistrer col-md-auto"/>
-                                     {{-- <a href="{{route('procedure.index')}}/{{$rub}}/{{$srub}}"></a> --}}
                                 <input type="hidden" name="rub" id="rub" value="{{$rub}}">
                                 <input type="hidden" name="srub" id="srub" value="{{$srub}}">
                             </div>
@@ -300,6 +299,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
 
 @endsection

@@ -7,7 +7,7 @@
     <div class="row justify-content-center align-items-center mb-4" >
         <div class="alert alert-secondary col-7" style="background-color:#F5F5F5;" role="alert">
             <ol>
-                <li> <mark> Si a c'est votre première fois, s'inscrivez-vous en appuyant sur le bouton "S'inscrire".               </mark></li><br/> 
+                <li> <mark> Si c'est votre première fois, inscrivez-vous en appuyant sur le bouton "S'inscrire".               </mark></li><br/> 
                 <li> <mark> Si vous avez déjà un compte, saisissez vos identifiants et votre mot de passe que vous avez crée en 1. </mark></li> 
             </ol>
         </div>

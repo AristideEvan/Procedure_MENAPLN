@@ -19,12 +19,11 @@ class Controller extends BaseController
     public function parametre_exists($rub,$srub,$param){
         return (in_array($param,$this->parametre($rub,$srub)))?true:false;
     }
-     
+
     public function newFormButton($rub,$srub,$lien){
         if (Auth::user()->profil->nomProfil=='Root'){
             $vue = '';
             $route = 'route';
-            // dd(session('menus'));
             if(array_key_exists(1,session('menus')[$rub][1][$srub]) && in_array("Créer",session('menus')[$rub][1][$srub][1])){
                 $vue .= '<a href="'.$route($lien).'/'.$rub.'/'.$srub.'">';
                 $vue .= '<input value="Nouveau" type="button" class="btn btn-primary btnEnregistrer" style="float:right">';
@@ -34,18 +33,16 @@ class Controller extends BaseController
         }else{
             $vue = '';
             $route = 'route';
-            // dd(session('menus'));
             if(array_key_exists(1,session('menus')[$rub][1][$srub]) && in_array("Créer",session('menus')[$rub][1][$srub][1])){
+                //dd(session('menus'));
                 $vue .= '<a href="'.$route($lien).'/'.$rub.'/'.$srub.'">';
                 $vue .= '<input value="Nouvelle demande" type="button" class="btn btn-primary btnEnregistrer" style="float:right">';
                 $vue .= '</a>';
-           } 
-           return $vue;
-       
-        }
-            
-                   
+        } 
+            return $vue;
+       }               
     }
+
     public function crudheader($rub,$srub){
         $head = '';
         if(array_key_exists(1,session('menus')[$rub][1][$srub])){
@@ -58,7 +55,7 @@ class Controller extends BaseController
         }
         return $head;
     } 
-    public function crudbody($rub,$srub,$route,$lienm,$liens,$id){
+    public function crudbody($rub,$srub,$route,$lienm,$liens,$id,$type=null){
         //dd($id);
         $lienpay = 'procedure.updateStatut';
         $lienmouvement = 'procedure.updateMouvement';
@@ -100,11 +97,11 @@ class Controller extends BaseController
                     // $body .= '</td>';
                 }
                 if(in_array("Transferer",session('menus')[$rub][1][$srub][1])){
-                    // $body .= '<td style="text-align: right" class="actionTd">';
-                    //$body .= '<a href="#" id="'.$route($liens,$id).'?type='.$type.'& rub='.$rub.'& srub='.$srub.'"';
+                    $body .= '<td style="text-align: right" class="actionTd">';
+                    $body .= '<a href="#" id="'.$route($liens,$id).'?type='.$type.'& rub='.$rub.'& srub='.$srub.'"';
                     $body .= '<a  href="#" id="'.$route($lienmouvement,$id).'?rub='.$rub.'& srub='.$srub.'"';
                     $body .= 'onclick="Mouvement(this.id,\'\');return false;"> <i class="fas fa-paper-plane" style="color: black" ></i> </a> &nbsp;&nbsp;';
-                    // $body .= '</td>';
+                    $body .= '</td>';
                 }
             }
         }
@@ -116,7 +113,7 @@ class Controller extends BaseController
         //dd($id);
         $lienpay = 'procedure.updateStatut';
         $lienmouvement = 'procedure.updateMouvement';
-    //public function crudbody($rub,$srub,$route,$lienm,$liens,$id,$type=null){
+        //public function crudbody($rub,$srub,$route,$lienm,$liens,$id,$type=null){
         $body = '';
         if(array_key_exists(1,session('menus')[$rub][1][$srub])){
             if(array_key_exists(1,session('menus')[$rub][1][$srub])){

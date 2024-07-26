@@ -1,4 +1,5 @@
 @extends('layouts.app')
+{{-- @extends((((Auth::user()->profil->nomProfil == 'Promoteur'  ? 'layouts.dashboardTemplate' : Auth::user()->profil->nomProfil == 'PROVINCE') ? 'layouts.metier' : (Auth::user()->profil->nomProfil == 'REGION' ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'DEP'))  ? 'layouts.metier' : Auth::user()->profil->nomProfil == 'SG') ? 'layouts.metier' : 'layouts.superadmin') --}}
 
 @section('content')
 
@@ -22,9 +23,9 @@
                                         onChange="Cacher(this.id);" 
                                         autocomplete="type_promoteur" autofocus>
                                         <option value="">----</option>
-                                        @foreach($typePromoteur as $type)
-                                            <option value="{{ $type->id }}">{{ $type->libelle }}</option>
-                                        @endforeach
+                                            @foreach($typePromoteur as $type)
+                                                <option value="{{ $type->id }}">{{ $type->libelle }}</option>
+                                            @endforeach
                                     </select>
                                     <div class="invalid-feedback">
                                         {{__('formulaire.Obligation')}}
@@ -204,7 +205,7 @@
                                     <input type="submit" id="valider" value="{{__('Enregistrer')}}" class="btn btn-success btnEnregistrer col-md-auto"/>
                                     <a href="{{ route('details') }}"><input type="button" id="annuler" value='{{__("Annuler")}}' class="btn btn-primary btnAnnuler col-md-auto"/></a>
                                     <a href="{{route('user.index')}}/{{$rub}}/{{$srub}}"></a>
-                                
+
                                 
                             </div>
                         </div>

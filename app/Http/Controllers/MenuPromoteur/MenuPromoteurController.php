@@ -15,8 +15,13 @@ use Illuminate\Support\Facades\DB;
 
 class MenuPromoteurController extends Controller
 {
+    // public function __construct()
+    // {
+    //    $this->middleware('auth');
+        
+    // }
     public function makeRequest(){
-        $user = Auth::user();
+            $user = Auth::user();
             if($user->niveauAction == null){ 
               //  dd($user->id);
                 $demandes = DB::table('demandes as dem')
@@ -140,8 +145,64 @@ class MenuPromoteurController extends Controller
                             ->get();
                 }
             }
+
+            ///////////////////////////////////////////////////////
+            $user_niv = Auth::user()->niveauAction;
+            $data0 = 0;
+            $data1 = 0;
+            $data2 = 0;
+            $data3 = 0;
+            switch ($user_niv) {
+                case 0:
+                    $data0 = DB::table('demandes AS d')
+                    ->where('d.statut', '=', 'SG')
+                    ->count();
+                    break;
+                case 1:
+                    $data0 = DB::table('demandes AS d')
+                    ->where('d.statut', '=', 'DEP')
+                    ->count();
+                    break;
+                case 2:
+                    $data0 = DB::table('demandes AS d')
+                    ->where('d.statut', '=', 'Region')
+                    ->count();
+                    break;
+                case 3:
+                        $data0 = DB::table('demandes AS d')
+                        ->where('d.statut', '=', 'Province')
+                        ->count();
+                    break;    
+                case 4:
+                    $data0 = DB::table('demandes AS d')
+                    ->where('d.statut', '=', 'Paye')
+                    ->count();
+                    break;
+                default:
+                    break;
+            }
+
+        //compteur des demandes traitées
+            $data1 = DB::table('demandes')
+            ->where('statut', '=', 'Signé') 
+            ->count();
+
+        //compteur des demandes à modifier
+            $data2 = DB::table('demandes')
+                ->where('statut', '=', 'Pour Modification')
+                ->count();
+
+        //compteur des demandes totales
+            // $data3 = DB::table('demandes')
+            // ->where('statut', '<>', 'Non Paye',)
+            // ->count();
+            ////////////////////////////////////////////
         return view('procedure/index',[
             'demandes'=>$demandes,
+            'data0'=>$data0,
+            'data1'=>$data1,
+            'data2'=>$data2,
+            'data3'=>$data3,
             'controler'=>$this,
             'rub'=>10,'srub'=>13
         ]);
